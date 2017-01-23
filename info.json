@@ -1,0 +1,8 @@
+{
+	"provider": ["IBM"], 
+	"name":  "OPL .NET Custom data source sample" ,
+	"model": [ "OPL-CPLEX" ],
+	"development": [ "c#" ],
+	"category": [ {"APPLICATION":["Desktop Application"]} ],
+	"abstract": "This sample demonstrates how to use the IBM Decision Optimization Modeling with OPL custom data source .net API to import data from a data source into an OPL model."
+}

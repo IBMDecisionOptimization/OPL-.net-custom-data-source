@@ -1,0 +1,36 @@
+<!-- Example file describing a MS SQL Server database and queries using a XML -->
+<datasource>
+    <!-- The driver.
+    
+    This sample supports 2 drivers:
+        - SqlClient : The SQL server client
+        - OleDb : The generic Ole DB driver (use this for Access)
+    -->
+    <driver>SqlClient</driver>
+
+	<!-- The connection string
+		 The default url connects to mssql on default port, using database 'master'
+        Trusted_Connection=True makes the SqlClient use windows authentication and
+        will try to login with your windows user/password.
+	 -->
+	<url>Server=.\SQLEXPRESS;Database=master;Trusted_Connection=True</url>
+	
+	<!-- The read queries
+		 The name attribute is used to populate the corresponding Data Element.
+	-->
+	<read>
+		<query name="Gasolines">SELECT NAME FROM GASDATA</query>
+		<query name="Oils">SELECT NAME FROM OILDATA</query>
+		<query name="GasData">SELECT * FROM GASDATA</query>
+		<query name="OilData">SELECT * FROM OILDATA</query>
+	</read>
+	
+	<!-- The output table mapping.
+		 This mapping define how output data sets are exported to the database.
+	-->
+	<write>
+		<!-- This maps the output dataset "Result" to the "result" table -->
+		<table name="Result" target="result"/>
+	</write>
+</datasource>
+
