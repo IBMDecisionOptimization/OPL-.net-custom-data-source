@@ -85,7 +85,7 @@ namespace CustomDataSourceSample
                 handler.EndTuple();
             }
             handler.EndSet();
-
+            handler.EndElement();
         }
 
         /// <summary>
@@ -107,6 +107,7 @@ namespace CustomDataSourceSample
             }
 
             handler.EndSet();
+            handler.EndElement();
         }
 
 
