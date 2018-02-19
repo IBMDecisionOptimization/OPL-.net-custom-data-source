@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data.Common;
 using System.Collections.Generic;
 using ILOG.Concert;
@@ -169,10 +169,22 @@ namespace CustomDataSourceSample
                 // read queries
                 foreach (KeyValuePair<string, string> query in this.configuration.ReadQueries) {
                     Console.WriteLine("Reading table " + query.Key + " with query " + query.Value);
-                    DbCommand command = con.CreateCommand();
-                    command.CommandText = query.Value;
-                    using (DbDataReader reader = command.ExecuteReader()) {
-                        this.ReadSetOrTuple(query.Key, reader);
+                    try
+                    {
+                        using (DbCommand command = con.CreateCommand())
+                        {
+                            command.CommandText = query.Value;
+                            using (DbDataReader reader = command.ExecuteReader())
+                            {
+                                if (!reader.HasRows)
+                                    Console.WriteLine(query.Key + "has 0 row");
+                                ReadSetOrTuple(query.Key, reader);
+                            }
+                        }
+                    }
+                    catch(System.Exception e)
+                    {
+                        Console.WriteLine("{0} Exception caught.", e);
                     }
                 }
             }
