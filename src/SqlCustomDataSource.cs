@@ -163,14 +163,15 @@ namespace CustomDataSourceSample
         {
             OplDataHandler handler = DataHandler;
 
-            using (DbConnection con = DbUtils.CreateConnection(this.configuration))
+            try
             {
-                con.Open();
-                // read queries
-                foreach (KeyValuePair<string, string> query in this.configuration.ReadQueries) {
-                    Console.WriteLine("Reading table " + query.Key + " with query " + query.Value);
-                    try
-                    {
+                using (DbConnection con = DbUtils.CreateConnection(this.configuration))
+                {
+                    con.Open();
+                    // read queries
+                    foreach (KeyValuePair<string, string> query in this.configuration.ReadQueries) {
+                        Console.WriteLine("Reading table " + query.Key + " with query " + query.Value);
+
                         using (DbCommand command = con.CreateCommand())
                         {
                             command.CommandText = query.Value;
@@ -182,11 +183,11 @@ namespace CustomDataSourceSample
                             }
                         }
                     }
-                    catch(System.Exception e)
-                    {
-                        Console.WriteLine("{0} Exception caught.", e);
-                    }
                 }
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine("{0} Exception caught.", e);
             }
         }
     }
